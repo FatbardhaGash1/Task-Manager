@@ -195,3 +195,47 @@ input:focus, select:focus, textarea:focus {
     border-color: var(--primary-pastel);
     box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.2);
 }
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #a5b4fc, #c084fc);
+    color: #4c1d95;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(165, 180, 252, 0.3);
+    background: linear-gradient(135deg, #818cf8, #a855f7);
+}
+
+.btn-danger {
+    background: var(--danger-pastel);
+    color: #991b1b;
+}
+
+.btn-danger:hover {
+    background: #fecaca;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: var(--success-pastel);
+    color: #166534;
+}
+
+.btn-success:hover {
+    background: var(--success-dark);
+}
+
+.btn-warning {
+    background: var(--warning-pastel);
+    color: #92400e;
+}
