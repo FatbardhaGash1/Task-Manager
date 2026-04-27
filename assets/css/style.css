@@ -464,3 +464,29 @@ body.dark .priority-low { background: #14532d; color: #dcfce7; }
 .task-card, .stat-card, .card {
     animation: fadeInUp 0.4s ease forwards;
 }
+
+.progress-bar {
+    background: #e9d5ff;
+    border-radius: 20px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #a5b4fc, #c084fc);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4c1d95;
+    font-weight: 600;
+    transition: width 0.5s ease;
+}
+
+body.dark .progress-bar {
+    background: #2d2a4a;
+}
+
+body.dark .progress-fill {
+    color: #c7d2fe;
+}
