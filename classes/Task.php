@@ -35,5 +35,9 @@ class ImportantTask extends Task {
 
     public function __construct($title, $description, $status, $assignedTo, $priority) {
         parent::__construct($title, $description, $status, $assignedTo);
+        $this->priority = $priority;
     }
+     public function getPriority() {
+        return $this->priority;
+     }
 }
