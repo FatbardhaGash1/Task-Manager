@@ -24,5 +24,9 @@ class User {
     public function getRole() {
         return $this->role;
     }
+    public function getInfo() {
+        return "Emri: $this->name, Email: $this->email, Roli: $this->role";
+    }
+}
 
     
