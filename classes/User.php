@@ -13,3 +13,16 @@ class User {
         $this->role = $role;
     }
 }
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function getRole() {
+        return $this->role;
+    }
+
+    
