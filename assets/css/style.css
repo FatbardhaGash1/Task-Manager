@@ -155,3 +155,43 @@ body.dark .task-card {
     box-shadow: var(--shadow);
     border-left-color: var(--primary-dark);
 }
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #6d28d9;
+    font-size: 14px;
+}
+
+body.dark label {
+    color: #c7d2fe;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e9d5ff;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+    font-family: 'Inter', sans-serif;
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea {
+    background: #1e1b2f;
+    border-color: #4c1d95;
+    color: #e2e8f0;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-pastel);
+    box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.2);
+}
