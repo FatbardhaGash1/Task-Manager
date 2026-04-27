@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+
+:root {
+    --primary-pastel: #a5b4fc;
+    --primary-light: #c7d2fe;
+    --primary-dark: #818cf8;
+    --secondary-pastel: #fbcfe8;
+    --success-pastel: #bbf7d0;
+    --success-dark: #86efac;
+    --warning-pastel: #fed7aa;
+    --warning-dark: #fdba74;
+    --danger-pastel: #fecaca;
+    --danger-dark: #fca5a5;
+    --purple-pastel: #e9d5ff;
+    --pink-pastel: #fce7f3;
+    --blue-pastel: #bfdbfe;
+    --green-pastel: #dcfce7;
+    --yellow-pastel: #fef9c3;
+    --orange-pastel: #ffedd5;
+    
+    --text-dark: #334155;
+    --text-light: #f8fafc;
+    --bg-light: #faf5ff;
+    --bg-card-light: #ffffff;
+    --bg-dark: #1e1b2f;
+    --bg-card-dark: #2d2a4a;
+    
+    --shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+    --shadow-lg: 0 20px 25px -5px rgba(139, 92, 246, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --radius: 20px;
+    --radius-sm: 14px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 50%, #f3e8ff 100%);
+    min-height: 100vh;
+}
+
+body.dark {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+}
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.header {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius);
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    border: 1px solid rgba(165, 180, 252, 0.3);
+    box-shadow: var(--shadow);
+}
+
+body.dark .header {
+    background: rgba(45, 42, 74, 0.7);
+    border-color: rgba(165, 180, 252, 0.2);
+}
+
+.logo h1 {
+    background: linear-gradient(135deg, #818cf8, #c084fc, #f0abfc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.logo p {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+body.dark .logo p {
+    color: #a5b4fc;
+}
