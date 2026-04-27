@@ -88,3 +88,29 @@ body.dark .header {
 body.dark .logo p {
     color: #a5b4fc;
 }
+.nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    padding: 10px 20px;
+    background: rgba(165, 180, 252, 0.2);
+    border-radius: 12px;
+    text-decoration: none;
+    color: #6d28d9;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+body.dark .nav a {
+    color: #c7d2fe;
+    background: rgba(165, 180, 252, 0.1);
+}
+
+.nav a:hover {
+    background: linear-gradient(135deg, #a5b4fc, #c084fc);
+    color: white;
+    transform: translateY(-2px);
+}
