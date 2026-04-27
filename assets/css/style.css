@@ -276,3 +276,39 @@ body.dark .badge-completed {
     background: #14532d; 
     color: #bbf7d0; 
 }
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #c7d2fe, #e9d5ff);
+    color: #5b21b6;
+    padding: 25px;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+body.dark .stat-card {
+    background: linear-gradient(135deg, #2d2a4a, #4c1d95);
+    color: #c7d2fe;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 14px;
+    opacity: 0.9;
+}
