@@ -35,8 +35,10 @@ class AdminUser extends User {
         parent::__construct($id, $name, $email, $role);
          $this->permissions = $permissions;
         
-        
-    }
+   }
+     public function getInfo() {
+        return parent::getInfo() . ", Lejet: " . implode(", ", $this->permissions);
+   }
 }
 
     
