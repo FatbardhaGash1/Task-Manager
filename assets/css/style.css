@@ -239,3 +239,40 @@ input:focus, select:focus, textarea:focus {
     background: var(--warning-pastel);
     color: #92400e;
 }
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-pending { 
+    background: #fed7aa; 
+    color: #9a3412; 
+}
+
+.badge-progress { 
+    background: #bfdbfe; 
+    color: #1e3a8a; 
+}
+
+.badge-completed { 
+    background: #bbf7d0; 
+    color: #14532d; 
+}
+
+body.dark .badge-pending { 
+    background: #7c2d12; 
+    color: #fed7aa; 
+}
+
+body.dark .badge-progress { 
+    background: #1e3a8a; 
+    color: #bfdbfe; 
+}
+
+body.dark .badge-completed { 
+    background: #14532d; 
+    color: #bbf7d0; 
+}
