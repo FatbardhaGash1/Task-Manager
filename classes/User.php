@@ -27,6 +27,13 @@ class User {
     public function getInfo() {
         return "Emri: $this->name, Email: $this->email, Roli: $this->role";
     }
+
+class AdminUser extends User {
+    private $permissions;
+
+    public function __construct($id, $name, $email, $role, $permissions) {
+        parent::__construct($id, $name, $email, $role);
+    }
 }
 
     
