@@ -12,7 +12,7 @@ class User {
         $this->email = $email;
         $this->role = $role;
     }
-}
+
     public function getName() {
         return $this->name;
     }
@@ -27,7 +27,7 @@ class User {
     public function getInfo() {
         return "Emri: $this->name, Email: $this->email, Roli: $this->role";
     }
-
+}
 class AdminUser extends User {
     private $permissions;
 
