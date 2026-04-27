@@ -29,3 +29,11 @@ class Task {
         return $this->assignedTo;
     }
 }
+
+class ImportantTask extends Task {
+    private $priority;
+
+    public function __construct($title, $description, $status, $assignedTo, $priority) {
+        parent::__construct($title, $description, $status, $assignedTo);
+    }
+}
