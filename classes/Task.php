@@ -12,3 +12,20 @@ class Task {
         $this->status = $status;
         $this->assignedTo = $assignedTo;
     }
+
+    public function getTitle() {
+        return $this->title;
+    }
+
+    public function getDescription() {
+        return $this->description;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function getAssignedTo() {
+        return $this->assignedTo;
+    }
+}
