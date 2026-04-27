@@ -114,3 +114,44 @@ body.dark .nav a {
     color: white;
     transform: translateY(-2px);
 }
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(165, 180, 252, 0.3);
+}
+
+body.dark .card {
+    background: rgba(45, 42, 74, 0.9);
+    color: #e2e8f0;
+    border-color: rgba(165, 180, 252, 0.2);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.task-card {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--primary-pastel);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+body.dark .task-card {
+    background: #2d2a4a;
+}
+
+.task-card:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow);
+    border-left-color: var(--primary-dark);
+}
