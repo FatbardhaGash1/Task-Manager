@@ -6,13 +6,13 @@ include '../includes/functions.php';
 
 requireLogin();
 
-// Inicializo tasks në session
+
 if (!isset($_SESSION['tasks'])) {
     $_SESSION['tasks'] = [];
     $_SESSION['next_task_id'] = 1;
 }
 
-// Statistikat
+
 $total = 0;
 $completed = 0;
 $pending = 0;

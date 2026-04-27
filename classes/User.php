@@ -33,6 +33,9 @@ class AdminUser extends User {
 
     public function __construct($id, $name, $email, $role, $permissions) {
         parent::__construct($id, $name, $email, $role);
+         $this->permissions = $permissions;
+        
+        
     }
 }
 
