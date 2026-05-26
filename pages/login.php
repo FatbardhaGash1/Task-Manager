@@ -7,28 +7,33 @@ require_once '../config/db.php';
 
 $error = "";
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = cleanInput($_POST['email']);
     $password = $_POST['password'];
 
-    if(!validateEmail($email)) {
+    if (!validateEmail($email)) {
         $error = "Email nuk është valid!";
     } else {
+        // Fetch user from database
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
-        if($user && password_verify($password, $user['password'])) {
+        if ($user && password_verify($password, $user['password'])) {
+            // Login successful – set session variables
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_role'] = $user['role'];
 
+            // Optional: set cookie for last user
             setcookie('last_user', $email, time() + 86400 * 30, '/');
-            header('Location: dashboard.php');
+
+            // Redirect to dashboard
+            header("Location: dashboard.php");
             exit();
         } else {
-            $error = "Kredenciale të pasakta!";
+            $error = "Email ose fjalëkalim i gabuar!";
         }
     }
 }
@@ -36,23 +41,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="card" style="max-width: 500px; margin: 0 auto;">
     <h2 style="text-align: center;">🔐 Hyr në llogarinë tënde</h2>
-    <?php if($error): ?>
-        <div class="alert alert-error">❌ <?php echo $error; ?></div>
+    
+    <?php if ($error): ?>
+        <div class="alert alert-error">❌ <?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
-    <form method="POST">
+
+    <form method="POST" action="">
         <div class="form-group">
-            <label>📧 Email</label>
+            <label>📧 Adresa Email</label>
             <input type="email" name="email" required placeholder="email@example.com">
         </div>
+        
         <div class="form-group">
             <label>🔒 Fjalëkalimi</label>
             <input type="password" name="password" required placeholder="••••••••">
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%">Kyçu</button>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Kyçu</button>
     </form>
-    <div style="margin-top: 20px; text-align:center;">
+    
+    <div style="margin-top: 20px; text-align: center;">
         <p>Nuk ke llogari? <a href="register.php">Regjistrohu këtu</a></p>
     </div>
 </div>
 
+<?php include '../includes/footer.php'; ?>
 <?php include '../includes/footer.php'; ?>
