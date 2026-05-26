@@ -8,7 +8,7 @@ function validateTaskTitle($title) {
 }
 
 function cleanInput($data) {
-    return htmlspecialchars(trim($data));
+    return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
 
 function requireLogin() {
