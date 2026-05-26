@@ -3,71 +3,182 @@ $page_title = "Detyrat";
 include '../includes/header.php';
 include '../includes/navigation.php';
 include '../includes/functions.php';
+include '../includes/db.php';
 
 requireLogin();
-if (!isset($_SESSION['tasks'])) {
-    $_SESSION['tasks'] = [];
-    $_SESSION['next_task_id'] = 1;
-}
 
 $message = "";
 $error = "";
 
 if(isset($_POST['add_task'])) {
+
     $title = cleanInput($_POST['title']);
-    $description = cleanInput($_POST['description']);
-    $priority = $_POST['priority'] ?? 'Medium';
-    
+
+    $description =
+    cleanInput($_POST['description']);
+
+    $priority =
+    $_POST['priority'] ?? 'Medium';
+
     if(validateTaskTitle($title)) {
-        $newTask = [
-            'id' => $_SESSION['next_task_id']++,
-            'title' => $title,
-            'description' => $description,
-            'status' => 'Pending',
-            'priority' => $priority,
-            'assignedTo' => $_SESSION['user_id'],
-            'created_at' => date('Y-m-d H:i:s')
-        ];
-        $_SESSION['tasks'][] = $newTask;
-        $message = "✅ Detyra u shtua me sukses!";
+
+        try {
+
+            $stmt = $pdo->prepare(
+
+            "INSERT INTO tasks
+            (title,description,priority,assigned_to)
+
+            VALUES
+
+            (?,?,?,?)"
+
+            );
+
+            $stmt->execute([
+
+                $title,
+
+                $description,
+
+                $priority,
+
+                $_SESSION['user_id']
+
+            ]);
+
+            $message =
+            "✅ Detyra u shtua me sukses!";
+
+        } catch(PDOException $e) {
+
+            $error =
+            "❌ Gabim gjatë shtimit!";
+
+        }
+
     } else {
-        $error = "❌ Titulli duhet të ketë 3-60 karaktere!";
+
+        $error =
+        "❌ Titulli duhet 3-60 karaktere!";
+
     }
+
 }
 
 if(isset($_GET['delete'])) {
-    foreach($_SESSION['tasks'] as $key => $task) {
-        if($task['id'] == $_GET['delete']) {
-            if($_SESSION['user_role'] == 'admin' || $task['assignedTo'] == $_SESSION['user_id']) {
-                unset($_SESSION['tasks'][$key]);
-                $_SESSION['tasks'] = array_values($_SESSION['tasks']);
-                $message = "✅ Detyra u fshi!";
-            } else {
-                $error = "❌ Nuk ke leje për të fshirë!";
-            }
-            break;
-        }
+
+    try {
+
+        $stmt = $pdo->prepare(
+
+        "DELETE FROM tasks
+        WHERE id = ?"
+
+        );
+
+        $stmt->execute([
+            $_GET['delete']
+        ]);
+
+        $message =
+        "✅ Detyra u fshi!";
+
+    } catch(PDOException $e) {
+
+        $error =
+        "❌ Gabim gjatë fshirjes!";
+
     }
+
 }
-if(isset($_GET['status']) && isset($_GET['id'])) {
-    foreach($_SESSION['tasks'] as $key => $task) {
-        if($task['id'] == $_GET['id']) {
-            if($_SESSION['user_role'] == 'admin' || $task['assignedTo'] == $_SESSION['user_id']) {
-                $_SESSION['tasks'][$key]['status'] = $_GET['status'];
-                $message = "✅ Statusi u ndryshua!";
-            } else {
-                $error = "❌ Nuk ke leje!";
-            }
-            break;
-        }
+if(isset($_GET['status']) && isset($_GET['id'])) {if(
+    isset($_GET['status']) &&
+    isset($_GET['id'])
+) {
+
+    try {
+
+        $stmt = $pdo->prepare(
+
+        "UPDATE tasks
+        SET status = ?
+        WHERE id = ?"
+
+        );
+
+        $stmt->execute([
+
+            $_GET['status'],
+
+            $_GET['id']
+
+        ]);
+
+        $message =
+        "✅ Statusi u ndryshua!";
+
+    } catch(PDOException $e) {
+
+        $error =
+        "❌ Gabim gjatë update!";
+
     }
+
+}
 }
 
-$userTasks = [];
-foreach($_SESSION['tasks'] as $task) {
-    if($_SESSION['user_role'] == 'admin' || $task['assignedTo'] == $_SESSION['user_id']) {
-        $userTasks[] = $task;
+try {
+
+    if($_SESSION['user_role'] == 'admin') {
+
+        $stmt = $pdo->query(
+
+        "SELECT tasks.*,
+        users.name AS user_name
+
+        FROM tasks
+
+        JOIN users
+        ON tasks.assigned_to = users.id
+
+        ORDER BY tasks.created_at DESC"
+
+        );
+
+    } else {
+
+        $stmt = $pdo->prepare(
+
+        "SELECT tasks.*,
+        users.name AS user_name
+
+        FROM tasks
+
+        JOIN users
+        ON tasks.assigned_to = users.id
+
+        WHERE assigned_to = ?
+
+        ORDER BY tasks.created_at DESC"
+
+        );
+
+        $stmt->execute([
+            $_SESSION['user_id']
+        ]);
+
     }
+
+    $userTasks = $stmt->fetchAll();
+
+} catch(PDOException $e) {
+
+    $userTasks = [];
+
+    $error =
+    "❌ Gabim gjatë leximit!";
+
 }
 ?>
 
