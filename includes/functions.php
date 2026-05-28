@@ -8,7 +8,7 @@ function validateTaskTitle($title) {
 }
 
 function cleanInput($data) {
-    return htmlspecialchars(trim($data));
+    return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
 
 function requireLogin() {
@@ -17,3 +17,8 @@ function requireLogin() {
         exit();
     }
 }
+
+function isAdmin() {
+    return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
+}
+?>
