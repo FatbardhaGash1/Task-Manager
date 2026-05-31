@@ -1,8 +1,7 @@
--- Databaza
+
 CREATE DATABASE IF NOT EXISTS task_manager_db;
 USE task_manager_db;
 
--- Tabela users
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
