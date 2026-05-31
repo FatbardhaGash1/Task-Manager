@@ -23,8 +23,6 @@ if (isset($_POST['change_password'])) {
     $current = $_POST['current_password'];
     $new = $_POST['new_password'];
     $confirm = $_POST['confirm_password'];
-    
-    // Fetch current hashed password from DB
     $stmt = $pdo->prepare("SELECT password FROM users WHERE id = ?");
     $stmt->execute([$_SESSION['user_id']]);
     $user = $stmt->fetch();
