@@ -5,7 +5,6 @@ requireLogin();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['task_id'])) {
     $task_id = (int)$_POST['task_id'];
-    // merr detyrën nga DB
     require_once 'config/db.php';
     $stmt = $pdo->prepare("SELECT * FROM tasks WHERE id = ?");
     $stmt->execute([$task_id]);
