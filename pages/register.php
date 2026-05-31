@@ -23,7 +23,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif($password !== $confirm) {
         $error = "Fjalëkalimet nuk përputhen.";
     } else {
-        // Kontrollo nëse emaili ekziston
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->execute([$email]);
         if($stmt->fetch()) {
