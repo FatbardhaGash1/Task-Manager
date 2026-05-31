@@ -9,14 +9,15 @@ requireLogin();
 $theme = $_COOKIE['theme'] ?? 'light';
 $lastUser = $_COOKIE['last_user'] ?? 'Nuk ka';
 
-// Handle theme change
 if (isset($_POST['theme'])) {
     setcookie('theme', $_POST['theme'], time() + 86400 * 30, '/');
     header("Location: profile.php");
     exit();
 }
 
-// Handle password change (optional but good)
+
+
+
 $passwordMessage = '';
 if (isset($_POST['change_password'])) {
     $current = $_POST['current_password'];
