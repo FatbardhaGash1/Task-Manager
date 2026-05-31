@@ -14,18 +14,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!validateEmail($email)) {
         $error = "Email nuk është valid!";
     } else {
+        // Fetch user from database
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
+            // Login successful – set session variables
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_role'] = $user['role'];
 
+            // Optional: set cookie for last user
             setcookie('last_user', $email, time() + 86400 * 30, '/');
 
+            // Redirect to dashboard
             header("Location: dashboard.php");
             exit();
         } else {

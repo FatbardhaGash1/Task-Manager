@@ -9,19 +9,21 @@ requireLogin();
 $theme = $_COOKIE['theme'] ?? 'light';
 $lastUser = $_COOKIE['last_user'] ?? 'Nuk ka';
 
+// Handle theme change
 if (isset($_POST['theme'])) {
     setcookie('theme', $_POST['theme'], time() + 86400 * 30, '/');
     header("Location: profile.php");
     exit();
 }
 
-
+// Handle password change (optional but good)
 $passwordMessage = '';
 if (isset($_POST['change_password'])) {
     $current = $_POST['current_password'];
     $new = $_POST['new_password'];
     $confirm = $_POST['confirm_password'];
     
+    // Fetch current hashed password from DB
     $stmt = $pdo->prepare("SELECT password FROM users WHERE id = ?");
     $stmt->execute([$_SESSION['user_id']]);
     $user = $stmt->fetch();

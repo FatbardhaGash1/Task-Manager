@@ -9,6 +9,7 @@ if(!isAdmin()) { header("Location: dashboard.php"); exit(); }
 
 $message = ""; $error = "";
 
+// Shto përdorues
 if(isset($_POST['add_user'])) {
     $name = cleanInput($_POST['name']);
     $email = cleanInput($_POST['email']);
@@ -28,6 +29,7 @@ if(isset($_POST['add_user'])) {
     }
 }
 
+// Fshi përdorues
 if(isset($_GET['delete'])) {
     $id = (int)$_GET['delete'];
     if($id == $_SESSION['user_id']) {
@@ -39,6 +41,7 @@ if(isset($_GET['delete'])) {
     }
 }
 
+// Merr të gjithë përdoruesit
 $users = $pdo->query("SELECT * FROM users ORDER BY id")->fetchAll();
 ?>
 
