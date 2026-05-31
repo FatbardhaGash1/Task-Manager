@@ -9,7 +9,6 @@ requireLogin();
 $message = "";
 $error = "";
 
-// Shtimi i detyrës (me file upload)
 if(isset($_POST['add_task'])) {
     $title = cleanInput($_POST['title']);
     $description = cleanInput($_POST['description']);
@@ -24,7 +23,6 @@ if(isset($_POST['add_task'])) {
             $stmt->execute([$title, $description, $priority, $user_id]);
             $task_id = $pdo->lastInsertId();
 
-            // File upload
             if(isset($_FILES['attachment']) && $_FILES['attachment']['error'] === UPLOAD_ERR_OK) {
                 $upload_dir = '../uploads/';
                 if(!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
@@ -46,7 +44,6 @@ if(isset($_POST['add_task'])) {
     }
 }
 
-// Fshirja e detyrës
 if(isset($_GET['delete'])) {
     $id = (int)$_GET['delete'];
     try {
@@ -63,7 +60,6 @@ if(isset($_GET['delete'])) {
     }
 }
 
-// Marrja e detyrave për t'i shfaqur
 if(isAdmin()) {
     $stmt = $pdo->query("SELECT t.*, u.name as assigned_name FROM tasks t LEFT JOIN users u ON t.user_id = u.id ORDER BY t.created_at DESC");
     $tasks = $stmt->fetchAll();
