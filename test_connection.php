@@ -1,6 +1,6 @@
 <?php
 
-include 'includes/db.php';
+include 'config/db.php';
 
 if(isset($pdo)) {
 
