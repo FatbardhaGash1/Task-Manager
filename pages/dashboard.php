@@ -6,21 +6,19 @@ include '../includes/functions.php';
 require_once '../config/db.php';
 requireLogin();
 
-// Get statistics based on role
+
+
 if (isAdmin()) {
-    // Admin sees all tasks
     $total = $pdo->query("SELECT COUNT(*) FROM tasks")->fetchColumn();
     $completed = $pdo->query("SELECT COUNT(*) FROM tasks WHERE status = 'Completed'")->fetchColumn();
     $inProgress = $pdo->query("SELECT COUNT(*) FROM tasks WHERE status = 'In Progress'")->fetchColumn();
     $pending = $pdo->query("SELECT COUNT(*) FROM tasks WHERE status = 'Pending'")->fetchColumn();
     
-    // Recent tasks (last 5)
     $recentStmt = $pdo->query("SELECT t.*, u.name AS user_name FROM tasks t 
                                LEFT JOIN users u ON t.user_id = u.id 
                                ORDER BY t.created_at DESC LIMIT 5");
     $recentTasks = $recentStmt->fetchAll();
 } else {
-    // Regular user sees only their tasks
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM tasks WHERE user_id = ?");
     $stmt->execute([$_SESSION['user_id']]); $total = $stmt->fetchColumn();
     
@@ -33,7 +31,6 @@ if (isAdmin()) {
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM tasks WHERE user_id = ? AND status = 'Pending'");
     $stmt->execute([$_SESSION['user_id']]); $pending = $stmt->fetchColumn();
     
-    // Recent tasks (last 5)
     $stmt = $pdo->prepare("SELECT * FROM tasks WHERE user_id = ? ORDER BY created_at DESC LIMIT 5");
     $stmt->execute([$_SESSION['user_id']]);
     $recentTasks = $stmt->fetchAll();
